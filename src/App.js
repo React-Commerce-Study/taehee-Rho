@@ -1,7 +1,9 @@
+import React from 'react'
 import GlobalStyle from "./style/GlobalStyle"
-import ElementStyle from "./style/ElementStyle"
 import { ThemeProvider } from "styled-components";
+import { Routes, Route } from "react-router-dom";
 import theme from './style/theme'
+import Home from './components/pages/Home'
 
 
 function App() {
@@ -9,12 +11,9 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-          <ElementStyle />
-          <p>안녕하세요</p>
-          <ul>
-            <li>sd</li>
-            <li>ss</li>
-          </ul>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+        </Routes>
       </ThemeProvider>
     </>
   );
