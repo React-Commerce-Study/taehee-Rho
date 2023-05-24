@@ -6,12 +6,12 @@ import Product from '../common/Product'
 
 function Home() {
     return(
-        <div>
+        <>
             <Header />
             <EventBanner />
             <Product />
             <Footer />
-        </div>
+        </>
     )
 }
 
