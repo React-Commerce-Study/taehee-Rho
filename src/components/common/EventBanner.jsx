@@ -97,7 +97,7 @@ const EventPage = styled(StyledLink) `
 
 export default function EventBanner() {
     return (
-        <EventImg>
+        <EventImg to="/home">
             <div className="arrow-btn-wrap">
                 <button className="left-btn" type="button"></button>
 
@@ -112,7 +112,7 @@ export default function EventBanner() {
                 <div className="dot"></div>
             </Pagenation>
 
-            <EventPage>
+            <EventPage to="/home">
                 <p>자세히 보기</p>
             </EventPage>
 

@@ -102,7 +102,7 @@ export default function Product() {
 
             <CartBtn type="button"></CartBtn>
 
-            <ProductCard>
+            <ProductCard to="/home">
                 <div className="product-img">
                     <img src={SampleImg} alt="샘플 이미지" />
                 </div>
