@@ -6,13 +6,19 @@ import Product from '../common/Product'
 import TopButton from '../common/TopButton';
 import styled from 'styled-components'
 
+const Products = styled.div`
+    width: 1280px;
+    margin: 0 auto;
+`
 
 function Home() {
     return(
         <>
             <Header />
             <EventBanner />
-            <Product />
+            <Products>
+                <Product />
+            </Products>
             <Footer />
             <TopButton />
         </>
