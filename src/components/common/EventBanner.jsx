@@ -68,7 +68,7 @@ const EventPage = styled(StyledLink) `
     background-color: var(--primaryColor);
     position: absolute;
     bottom: -32px;
-    right: 240px;
+    right: 140px;
     text-align: center;
     display: flex;
     flex-direction: column;

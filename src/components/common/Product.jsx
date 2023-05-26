@@ -31,6 +31,7 @@ const CartBtn = styled.button `
     position: absolute;
     right: 20px;
     top: 304px;
+    cursor: pointer;
 
     &::before {
         content: '';

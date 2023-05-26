@@ -9,10 +9,16 @@ const StyledLink = styled(Link)`
     text-decoration: none;
 `;
 
-const FooterStyle = styled.footer`
+const FooterWrap = styled.div`
+    width: 100%;
     background-color: var(--gray600);
-    padding: 60px 320px;
     margin-top: 230px;
+`
+
+const FooterStyle = styled.footer`
+    width: 1280px;
+    margin: 0 auto;
+    padding: 60px 0;
 `
 
 const FooterLinkWrap = styled.section`
@@ -60,6 +66,7 @@ const FooterText = styled.p`
 
 export default function Footer() {
     return (
+        <FooterWrap>
         <FooterStyle>
             <FooterLinkWrap>
                 <div className="footer-link-left">
@@ -95,5 +102,6 @@ export default function Footer() {
                 대표 : 김호두 <br />
             </FooterText>
         </FooterStyle>
+        </FooterWrap>
     )
 }
