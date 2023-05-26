@@ -4,6 +4,7 @@ import Footer from '../layout/Footer'
 import EventBanner from '../common/EventBanner'
 import Product from '../common/Product'
 import TopButton from '../common/TopButton';
+import Filter from '../common/Filter';
 import styled from 'styled-components'
 
 const Products = styled.div`
@@ -16,6 +17,7 @@ function Home() {
         <>
             <Header />
             <EventBanner />
+            <Filter />
             <Products>
                 <Product />
             </Products>
