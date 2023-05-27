@@ -9,7 +9,7 @@ import styled from 'styled-components'
 
 const Products = styled.div`
     width: 1280px;
-    margin: 0 auto;
+    margin: 80px auto;
 `
 
 function Home() {
@@ -17,8 +17,8 @@ function Home() {
         <>
             <Header />
             <EventBanner />
-            <Filter />
             <Products>
+                <Filter />
                 <Product />
             </Products>
             <Footer />
