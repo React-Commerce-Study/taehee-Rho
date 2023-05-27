@@ -4,9 +4,17 @@ import { Link } from 'react-router-dom'
 import SampleImg from '../../assets/images/sample.png'
 import cardCartIcon from '../../assets/images/icon-shopping-cart-white.svg'
 
-const StyledLink = styled(Link)``;
+const StyledLink = styled(Link)`
+color: var(--black);`;
 
-const ProductCardWrap = styled.section `
+const Products = styled.div`
+    width: 1280px;
+    margin: 80px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+`
+
+const ProductCardWrap = styled.li `
     width: 380px;
     margin-top: 48px;
     position: relative;
@@ -44,7 +52,7 @@ const CartBtn = styled.button `
     }
 `
 
-const ProductCard = styled(StyledLink)`
+const ProductCardLink = styled(StyledLink)`
     overflow: hidden;
     text-decoration: none;
 
@@ -95,9 +103,42 @@ const ProductCard = styled(StyledLink)`
 `
 
 export default function Product(props) {
-    console.log(props.productApi);
+    console.log(props.productApi)
+
+    const priceDivide = (price) => {
+        const n =  price.toString().slice(0, 3) + "," + price.toString().slice(3);
+        return n
+    }
+
+    const num = props.productApi[0].price;
+    console.log(num)
+
+    console.log(priceDivide(num))
+
+ 
     return (
-        <ProductCardWrap>
+        <Products>
+            {props.productApi.map(productCard => {
+                return <ProductCardWrap key={productCard.product_id}>
+
+            <LabelCard>
+                HOT
+            </LabelCard>
+
+            <CartBtn type="button"></CartBtn>
+
+            <ProductCardLink to="/home">
+                <div className="product-img">
+                    <img src={productCard.image} alt="상품 이미지" />
+                </div>
+
+                <p className="product-card-saller">{productCard.store_name}</p>
+                <p className="product-card-title">{productCard.product_name}</p>
+                <p className="product-card-price"><strong>{priceDivide(productCard.price)}</strong>원</p>
+            </ProductCardLink>
+                </ProductCardWrap>
+            })}
+        {/* <ProductCardWrap>
             <LabelCard>
                 HOT
             </LabelCard>
@@ -113,6 +154,7 @@ export default function Product(props) {
                 <p className="product-card-title">버그잡는 개리 키링버그잡는 개리 키링버그잡는 개리 키링버그잡는 개리 키링</p>
                 <p className="product-card-price"><strong>29,000</strong>원</p>
             </ProductCard>
-        </ProductCardWrap>
+        </ProductCardWrap> */}
+        </Products>
     )
 }

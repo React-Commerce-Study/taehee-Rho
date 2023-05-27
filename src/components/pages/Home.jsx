@@ -8,10 +8,6 @@ import TopButton from '../common/TopButton';
 import Filter from '../common/Filter';
 import styled from 'styled-components';
 
-const Products = styled.div`
-    width: 1280px;
-    margin: 80px auto;
-`
 
 function Home() {
 
@@ -48,10 +44,8 @@ function Home() {
         <>
             <Header />
             <EventBanner />
-            <Products>
-                <Filter />
-                <Product productApi={products}/>
-            </Products>
+            <Filter />
+            <Product productApi={products}/>
             <Footer />
             <TopButton />
         </>
