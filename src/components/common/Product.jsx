@@ -9,14 +9,13 @@ color: var(--black);`;
 
 const Products = styled.div`
     width: 1280px;
-    margin: 80px auto;
+    margin: 40px auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 `
 
 const ProductCardWrap = styled.li `
     width: 380px;
-    margin-top: 48px;
     position: relative;
     color: var(--white);
 

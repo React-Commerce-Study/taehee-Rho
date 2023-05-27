@@ -6,6 +6,8 @@ const StyledLink = styled(Link)``
 
 const Filters = styled.div`
     display: flex;
+    width: 1280px;
+    margin: 80px auto 0 auto;
     gap: 20px;
 
     .filter-active {
