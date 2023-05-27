@@ -94,7 +94,8 @@ const ProductCard = styled(StyledLink)`
     }
 `
 
-export default function Product() {
+export default function Product(props) {
+    console.log(props.productApi);
     return (
         <ProductCardWrap>
             <LabelCard>
