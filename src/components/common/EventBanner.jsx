@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import leftBtn from '../../assets/images/icon-swiper-1.svg'
 import rightBtn from '../../assets/images/icon-swiper-2.svg'
 import EventArrow from '../../assets/images/icon-arrow-left.svg'
+import carouselDate from '../../mock/carouselData'
 
 
 const StyledLink = styled(Link)``;
@@ -96,6 +97,8 @@ const EventPage = styled(StyledLink) `
 `
 
 export default function EventBanner() {
+
+    
     return (
         <EventImg to="/home">
             <div className="arrow-btn-wrap">
