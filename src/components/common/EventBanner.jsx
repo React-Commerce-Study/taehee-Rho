@@ -15,7 +15,8 @@ const Banner = styled.article`
     background-color: red;
     position: relative;
 
-    button {
+    .left-btn,
+    .right-btn {
         width: 60px;
         height: 124px;
         cursor: pointer;
@@ -23,7 +24,6 @@ const Banner = styled.article`
         top: 50%;
         transform: translateY(-50%);
         display: block;
-        /* left: 0; */
     }
 
     .left-btn {
@@ -46,26 +46,28 @@ const BannerImg = styled(StyledLink)`
         object-fit: cover;
     }
 `
-// //* 배너 넘어갈때 같이 넘어감/ 해당 dot을 클릭해도 그 위치에 있는 배너로 이동
-// const Pagenation = styled.section`
-//     display: flex;
-//     gap: 12px;
-//     position: absolute;
-//     bottom: 20px;
-//     left: 50%;
-//     transform: translateX(-50%);
+// //* 배너 넘어갈때 같이 넘어감/ 해당 dot을 클릭해도 그 위치에 있는 배너로 이동 INDICATOR
+const Indicator = styled.section`
+    display: flex;
+    gap: 12px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
 
-//     .dot {
-//         width: 10px;
-//         height: 10px;
-//         background-color: var(--white);
-//         border-radius: 50px;
-//     }
+    .dot {
+        width: 12px;
+        height: 12px;
+        background-color: var(--white);
+        border-radius: 50px;
+        cursor: pointer;
+    }
 
-//     .dot-active {
-//         background-color: var(--black);
-//     }
-// `
+    .active {
+        background-color: var(--black);
+    }
+`
+
 
 const EventPage = styled.div `
     width: 100px;
@@ -101,7 +103,6 @@ const EventPage = styled.div `
 `
 
 export default function EventBanner() {
-    console.log(carouselDate)
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const handlerNext = () => {
@@ -114,7 +115,10 @@ export default function EventBanner() {
         );
     }
 
-    
+    const handleSlide = (index) => {
+        setCurrentIndex(index);
+    };
+
     return (
         <Banner>
             <BannerImg to={carouselDate[currentIndex].src} key={carouselDate[currentIndex].id}>
@@ -124,18 +128,44 @@ export default function EventBanner() {
                 </EventPage>
             </BannerImg>
 
+            <Indicator>
+                {carouselDate.map((slides, index) => {
+                    return <button key={slides.id} type="button" className={`dot ${index === currentIndex ? 'active' : ''}`} onClick={() => handleSlide(index)}></button>
+                })}
+            </Indicator>
 
             <button className="left-btn" type="button" onClick={handlerNext}></button>
             <button className="right-btn" type="button" onClick={handlerPrevious}></button>
         </Banner>
-
-        //     <Pagenation>
-        //         <div className="dot dot-active"></div>
-        //         <div className="dot"></div>
-        //         <div className="dot"></div>
-        //         <div className="dot"></div>
-        //         <div className="dot"></div>
-        //     </Pagenation>
-
     )
 }
+
+
+// import React, { useState } from 'react';
+
+// const Carousel = () => {
+//   const [activeIndex, setActiveIndex] = useState(0);
+
+//   const handleSlide = (index) => {
+//     setActiveIndex(index);
+//   };
+
+//   return (
+//     <div className="carousel">
+//       <div className="slides">
+//         {/* 슬라이드 내용 */}
+//       </div>
+//       <div className="indicators">
+//         {slides.map((slide, index) => (
+//           <button
+//             key={index}
+//             className={`indicator ${index === activeIndex ? 'active' : ''}`}
+//             onClick={() => handleSlide(index)}
+//           ></button>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Carousel;
