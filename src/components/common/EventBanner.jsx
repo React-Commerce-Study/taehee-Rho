@@ -1,4 +1,4 @@
-import React from 'react'
+import {useState, useEffect,  React} from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 import leftBtn from '../../assets/images/icon-swiper-1.svg'
@@ -9,68 +9,71 @@ import carouselDate from '../../mock/carouselData'
 
 const StyledLink = styled(Link)``;
 
-
-//* 방향버튼, dot, 일정시간이 지나면 배너 이미지 넘어감
-//* 각 이미지마다 이동 링크가 다름
-const EventImg = styled(StyledLink)`
-    display: flex;
+const Banner = styled.article`
+    width: 100vw;
+    height: 450px;
+    background-color: red;
     position: relative;
-    flex-direction: column;
-    justify-content: center;
-    height: 500px;
-    background-color: var(--gray600);
-
-    .arrow-btn-wrap {
-        display: flex;
-        margin: 0 30px;
-        justify-content: space-between;
-    }
 
     button {
         width: 60px;
         height: 124px;
         cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: block;
+        /* left: 0; */
     }
-
-    //* 클릭시 전이나 후 배너로 이동
 
     .left-btn {
         background: url(${leftBtn}) no-repeat center/cover;
+        margin-left: 30px;
     }
 
     .right-btn {
         background: url(${rightBtn}) no-repeat center/cover;
+        margin-right: 30px;
+        right: 0;
     }
 `
-//* 배너 넘어갈때 같이 넘어감/ 해당 dot을 클릭해도 그 위치에 있는 배너로 이동
-const Pagenation = styled.section`
-    display: flex;
-    gap: 12px;
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-
-    .dot {
-        width: 10px;
-        height: 10px;
-        background-color: var(--white);
-        border-radius: 50px;
-    }
-
-    .dot-active {
-        background-color: var(--black);
+const BannerImg = styled(StyledLink)`
+    background-color: blue;
+    
+    img {
+        width: 100vw;
+        height: 100%;
+        object-fit: cover;
     }
 `
-//* 클릭시 현재 떠있는 이벤트 페이지로 넘어감
-const EventPage = styled(StyledLink) `
+// //* 배너 넘어갈때 같이 넘어감/ 해당 dot을 클릭해도 그 위치에 있는 배너로 이동
+// const Pagenation = styled.section`
+//     display: flex;
+//     gap: 12px;
+//     position: absolute;
+//     bottom: 20px;
+//     left: 50%;
+//     transform: translateX(-50%);
+
+//     .dot {
+//         width: 10px;
+//         height: 10px;
+//         background-color: var(--white);
+//         border-radius: 50px;
+//     }
+
+//     .dot-active {
+//         background-color: var(--black);
+//     }
+// `
+
+const EventPage = styled.div `
     width: 100px;
     height: 100px;
     background-color: var(--primaryColor);
     position: absolute;
-    bottom: -32px;
-    right: 140px;
-    text-align: center;
+    bottom: -50px;
+    right: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,8 +81,9 @@ const EventPage = styled(StyledLink) `
 
 
     p {
-        /* background-color: red; */
         color: var(--white);
+        width: 100%;
+        text-align: center;
         text-decoration: none;
         position: absolute;
         bottom: 10px;
@@ -89,36 +93,49 @@ const EventPage = styled(StyledLink) `
     &::before {
         content: '';
         display: block;
-        width: 32px;
-        height: 32px;
+        width: 24px;
+        height: 24px;
         background: url(${EventArrow}) no-repeat center / cover;
     }
 
 `
 
 export default function EventBanner() {
+    console.log(carouselDate)
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const handlerNext = () => {
+        setCurrentIndex((nextIndex) => nextIndex === carouselDate.length - 1 ? 0 : nextIndex + 1
+        );
+    }
+
+    const handlerPrevious = () => {
+        setCurrentIndex((prevIndex) => prevIndex === 0 ? carouselDate.length - 1 : prevIndex - 1
+        );
+    }
 
     
     return (
-        <EventImg to="/home">
-            <div className="arrow-btn-wrap">
-                <button className="left-btn" type="button"></button>
+        <Banner>
+            <BannerImg to={carouselDate[currentIndex].src} key={carouselDate[currentIndex].id}>
+                <img src={carouselDate[currentIndex].img_url} alt={carouselDate[currentIndex].img_name} />
+                <EventPage>
+                    <p>자세히 보기</p>
+                </EventPage>
+            </BannerImg>
 
-                <button className="right-btn" type="button"></button>
-            </div>
 
-            <Pagenation>
-                <div className="dot dot-active"></div>
-                <div className="dot"></div>
-                <div className="dot"></div>
-                <div className="dot"></div>
-                <div className="dot"></div>
-            </Pagenation>
+            <button className="left-btn" type="button" onClick={handlerNext}></button>
+            <button className="right-btn" type="button" onClick={handlerPrevious}></button>
+        </Banner>
 
-            <EventPage to="/home">
-                <p>자세히 보기</p>
-            </EventPage>
+        //     <Pagenation>
+        //         <div className="dot dot-active"></div>
+        //         <div className="dot"></div>
+        //         <div className="dot"></div>
+        //         <div className="dot"></div>
+        //         <div className="dot"></div>
+        //     </Pagenation>
 
-        </EventImg>
     )
 }

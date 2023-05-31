@@ -50,7 +50,7 @@ const GlobalStyle = createGlobalStyle `
 
 
     :root {
-        --primaryColor: #21BF48;
+        --primaryColor: #19D748;
         --black: #000000;
         --gray900: #5E5E5E;
         --gray800: #848484;

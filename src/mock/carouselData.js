@@ -9,7 +9,7 @@ const carouselImages = [
     {
         id: 1,
         img_url:
-        "https://product-image.kurly.com/cdn-cgi/image/quality=85/banner/main/pc/img/5190f93d-5ccb-42be-871a-49307d7cda25.png0",
+        "https://product-image.kurly.com/cdn-cgi/image/quality=85/banner/main/pc/img/5190f93d-5ccb-42be-871a-49307d7cda25.png",
         img_name: "이미지2",
         src: "/",
     },

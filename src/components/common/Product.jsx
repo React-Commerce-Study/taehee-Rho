@@ -103,18 +103,11 @@ const ProductCardLink = styled(StyledLink)`
 `
 
 export default function Product(props) {
-    console.log(props.productApi)
-
     const priceDivide = (price) => {
         return  price.toLocaleString();
     }
 
-    const num = props.productApi[0].price;
-    console.log(num)
 
-    console.log(priceDivide(num))
-
- 
     return (
         <Products>
             {props.productApi.map(productCard => {
