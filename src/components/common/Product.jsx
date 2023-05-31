@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import SampleImg from '../../assets/images/sample.png'
 import cardCartIcon from '../../assets/images/icon-shopping-cart-white.svg'
 
 const StyledLink = styled(Link)`
@@ -11,7 +10,9 @@ const Products = styled.div`
     width: 1280px;
     margin: 40px auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 80px;
+
 `
 
 const ProductCardWrap = styled.li `
@@ -105,8 +106,7 @@ export default function Product(props) {
     console.log(props.productApi)
 
     const priceDivide = (price) => {
-        const n =  price.toString().slice(0, 3) + "," + price.toString().slice(3);
-        return n
+        return  price.toLocaleString();
     }
 
     const num = props.productApi[0].price;
@@ -134,26 +134,9 @@ export default function Product(props) {
                 <p className="product-card-saller">{productCard.store_name}</p>
                 <p className="product-card-title">{productCard.product_name}</p>
                 <p className="product-card-price"><strong>{priceDivide(productCard.price)}</strong>원</p>
-            </ProductCardLink>
+                </ProductCardLink>
                 </ProductCardWrap>
             })}
-        {/* <ProductCardWrap>
-            <LabelCard>
-                HOT
-            </LabelCard>
-
-            <CartBtn type="button"></CartBtn>
-
-            <ProductCard to="/home">
-                <div className="product-img">
-                    <img src={SampleImg} alt="샘플 이미지" />
-                </div>
-
-                <p className="product-card-saller">제주코딩 베이스 캠프</p>
-                <p className="product-card-title">버그잡는 개리 키링버그잡는 개리 키링버그잡는 개리 키링버그잡는 개리 키링</p>
-                <p className="product-card-price"><strong>29,000</strong>원</p>
-            </ProductCard>
-        </ProductCardWrap> */}
         </Products>
     )
 }
