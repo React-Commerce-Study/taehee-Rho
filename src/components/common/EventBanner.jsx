@@ -123,6 +123,17 @@ export default function EventBanner() {
         setCurrentIndex(index);
     };
 
+    // 3초 지나면 자동으로 index 변경
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((count) => count === carouselDate.length - 1 ? 0 : count + 1)
+        }, 3000)
+
+        return () => {
+            clearInterval(interval);
+            };
+    },[carouselDate])
+
     return (
         <Banner>
             <BannerImg to={carouselDate[currentIndex].src} key={carouselDate[currentIndex].id}>
