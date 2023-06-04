@@ -46,7 +46,7 @@ const BannerImg = styled(StyledLink)`
         object-fit: cover;
     }
 `
-// //* 배너 넘어갈때 같이 넘어감/ 해당 dot을 클릭해도 그 위치에 있는 배너로 이동 INDICATOR
+
 const Indicator = styled.section`
     display: flex;
     gap: 12px;
@@ -103,18 +103,22 @@ const EventPage = styled.div `
 `
 
 export default function EventBanner() {
+    // 현재 index값 설정
     const [currentIndex, setCurrentIndex] = useState(0);
 
+    // next 버튼 클릭시 이미지 index + 1
     const handlerNext = () => {
         setCurrentIndex((nextIndex) => nextIndex === carouselDate.length - 1 ? 0 : nextIndex + 1
         );
     }
 
+    // prev 버튼 클릭시 이미지 index - 1
     const handlerPrevious = () => {
         setCurrentIndex((prevIndex) => prevIndex === 0 ? carouselDate.length - 1 : prevIndex - 1
         );
     }
 
+    // 클릭한 index 로 변경
     const handleSlide = (index) => {
         setCurrentIndex(index);
     };
@@ -139,33 +143,3 @@ export default function EventBanner() {
         </Banner>
     )
 }
-
-
-// import React, { useState } from 'react';
-
-// const Carousel = () => {
-//   const [activeIndex, setActiveIndex] = useState(0);
-
-//   const handleSlide = (index) => {
-//     setActiveIndex(index);
-//   };
-
-//   return (
-//     <div className="carousel">
-//       <div className="slides">
-//         {/* 슬라이드 내용 */}
-//       </div>
-//       <div className="indicators">
-//         {slides.map((slide, index) => (
-//           <button
-//             key={index}
-//             className={`indicator ${index === activeIndex ? 'active' : ''}`}
-//             onClick={() => handleSlide(index)}
-//           ></button>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Carousel;
