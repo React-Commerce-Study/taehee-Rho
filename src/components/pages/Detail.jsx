@@ -10,6 +10,8 @@ import Button from "../common/Button";
 export default function Detail() {
   const { product_id } = useParams();
   const [detailProduct, setDetailProduct] = useState({});
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [count, setCount] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -18,7 +20,7 @@ export default function Detail() {
       const response = await axios.get(
         `https://openmarket.weniv.co.kr/products/${product_id}`
       );
-      console.log(response.data);
+      setTotalPrice(response.data.price + response.data.shipping_fee);
       return setDetailProduct(response.data);
     } catch (e) {
       setError(e);
@@ -29,34 +31,48 @@ export default function Detail() {
     fetchProductDetail();
   }, []);
 
-  console.log(detailProduct);
+  const getPrice = (price) => {
+    setTotalPrice(price);
+  };
+
+  const getCount = (prevcount) => {
+    setCount(prevcount);
+  };
+
   return (
     <>
       <Header />
       <DetailWrap>
-        <img src={detailProduct.image} alt="상품 이미지" />
+        <img src={detailProduct?.image} alt="상품 이미지" />
         <div className="product-detail">
           <DetailTop>
-            <p>{detailProduct.store_name}</p>
-            <h2>{detailProduct.product_name}</h2>
+            <p>{detailProduct?.store_name}</p>
+            <h2>{detailProduct?.product_name}</h2>
             <p>
-              <strong>{detailProduct.price}</strong> 원
+              <strong>{detailProduct?.price}</strong> 원
             </p>
           </DetailTop>
           <DetailBottom>
-            <p className="fee-text">{`택배배송 / ${detailProduct.shipping_fee}`}</p>
+            <p className="fee-text">{`택배배송 / ${detailProduct?.shipping_fee}`}</p>
             <hr />
-            <Counter />
+            <Counter
+              getPrice={getPrice}
+              totalPrice={totalPrice}
+              count={count}
+              getCount={getCount}
+              productPrice={detailProduct.price}
+              productStock={detailProduct.stock}
+            />
             <hr />
             <ProductPrice>
               <p className="total-product-price">총 상품 금액</p>
               <div className="product-price-wrap">
                 <span>
-                  총 수량 <strong>1</strong> 개
+                  총 수량 <strong>{count}</strong> 개
                 </span>
                 <span></span>
                 <span>
-                  <strong>20,500</strong>원
+                  <strong>{totalPrice}</strong>원
                 </span>
               </div>
             </ProductPrice>
@@ -78,7 +94,7 @@ const DetailWrap = styled.article`
   display: flex;
   gap: 50px;
 
-  & div,
+  .product-detail,
   & img {
     width: 100%;
   }
@@ -125,13 +141,13 @@ const DetailBottom = styled.div`
 
 const ProductPrice = styled.section`
   display: flex;
-  justify-content: space-between;
-  // 왜 안먹니..
   margin-top: 32px;
+  align-items: center;
+  justify-content: space-between;
 
   .total-product-price {
-    width: 100%;
     font-size: 18px;
+    flex-shrink: 0;
     font-family: var(--font--Medium);
   }
 
@@ -174,12 +190,8 @@ const ButtonWrap = styled.div`
   display: flex;
   gap: 14px;
 
-  button:first-child {
-    flex-grow: 2;
-  }
-  // 왜 안먹니...
-
   button:last-child {
+    flex-basis: 45%;
     flex-grow: 1;
   }
 `;

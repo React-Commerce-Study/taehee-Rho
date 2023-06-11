@@ -3,31 +3,49 @@ import styled from "styled-components";
 import PlusIcon from "../../assets/icon-plus-line.svg";
 import MinusIcon from "../../assets/icon-minus-line.svg";
 
-export default function Counter() {
-  const [count, setCount] = useState(1);
-  console.log(`현재 카운트: ${count}`);
+export default function Counter({
+  getPrice,
+  getCount,
+  productPrice,
+  productStock,
+  totalPrice,
+  count,
+}) {
+  console.log(productPrice, productStock, totalPrice);
 
-  const productNumHandler = (type) => {
-    if (type === "add") {
-      setCount((prevCount) => prevCount + 1);
-    } else if (count > 1) {
-      setCount((prevCount) => prevCount - 1);
+  const plusHandler = () => {
+    if (productStock === 0) {
+      alert("재고가 없는 상품입니다");
+      return;
+    }
+    if (count < productStock) {
+      getCount(count + 1);
+      getPrice(totalPrice + productPrice);
+    }
+  };
+
+  const minusHandler = () => {
+    if (count > 1) {
+      getCount(count - 1);
+      getPrice(totalPrice - productPrice);
     }
   };
 
   return (
     <CounterWrap>
+      <MinusButton
+        type="button"
+        onClick={() => {
+          minusHandler();
+        }}
+      ></MinusButton>
+      <p>{count}</p>
       <PlusButton
         type="button"
         onClick={() => {
-          productNumHandler("add");
+          plusHandler();
         }}
       ></PlusButton>
-      <p>{count}</p>
-      <MinusButton
-        type="button"
-        onClick={() => productNumHandler("minus")}
-      ></MinusButton>
     </CounterWrap>
   );
 }
@@ -53,7 +71,7 @@ const CounterWrap = styled.section`
   }
 `;
 const PlusButton = styled.button`
-  border-right: 1px solid var(--gray700);
+  border-left: 1px solid var(--gray700);
   &::before {
     content: "";
     display: block;
@@ -64,7 +82,7 @@ const PlusButton = styled.button`
   }
 `;
 const MinusButton = styled.button`
-  border-left: 1px solid var(--gray700);
+  border-right: 1px solid var(--gray700);
   &::before {
     content: "";
     display: block;

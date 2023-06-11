@@ -23,7 +23,6 @@ function Home() {
       const response = await axios.get(
         `https://openmarket.weniv.co.kr/products/?page=${page}`
       );
-      console.log(response.data);
       return response.data;
     } catch (e) {
       setError(e);
@@ -42,8 +41,6 @@ function Home() {
       })();
     }
   }, [page, hasNext]);
-
-  console.log(page, hasNext);
 
   // 스크롤 이벤트 핸들러 등록
   const scrollHandle = () => {
