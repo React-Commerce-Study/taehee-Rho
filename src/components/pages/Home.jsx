@@ -72,24 +72,6 @@ function Home() {
       <TopButton />
     </>
   );
-
-  // useEffect(() => {
-  //   setIsBottom(scrollHeight <= scrollTop + clientHeight);
-
-  //     window.addEventListener("scroll", scrollHandle);
-  // });
-
-  // const scrollHandle = () => {
-  //   const scrollHeight = document.documentElement.scrollHeight;
-  //   const scrollTop = document.documentElement.scrollTop;
-  //   const clientHeight = document.documentElement.clientHeight;
-
-  //   if (scrollHeight <= scrollTop + clientHeight) {
-  //     fetchProducts();
-  //   }
-  //   console.log(products);
-
-  // }
 }
 
 export default Home;
