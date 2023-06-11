@@ -10,7 +10,7 @@ function App() {
     <>
       <GlobalStyle />
       <Routes>
-        <Route path="/products" element={<Detail />} />
+        <Route path="/products/:product_id" element={<Detail />} />
         <Route path="/home" element={<Home />} />
       </Routes>
     </>

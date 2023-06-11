@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
@@ -6,21 +8,43 @@ import Counter from "../common/Counter";
 import Button from "../common/Button";
 
 export default function Detail() {
+  const { product_id } = useParams();
+  const [detailProduct, setDetailProduct] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchProductDetail = async () => {
+    try {
+      const response = await axios.get(
+        `https://openmarket.weniv.co.kr/products/${product_id}`
+      );
+      console.log(response.data);
+      return setDetailProduct(response.data);
+    } catch (e) {
+      setError(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchProductDetail();
+  }, []);
+
+  console.log(detailProduct);
   return (
     <>
       <Header />
       <DetailWrap>
-        <div className="product-img">...</div>
+        <img src={detailProduct.image} alt="상품 이미지" />
         <div className="product-detail">
           <DetailTop>
-            <p>백엔드 글로벌</p>
-            <h2>딥러닝 개발자 무릎 담요</h2>
+            <p>{detailProduct.store_name}</p>
+            <h2>{detailProduct.product_name}</h2>
             <p>
-              <strong>17,500</strong>원
+              <strong>{detailProduct.price}</strong> 원
             </p>
           </DetailTop>
           <DetailBottom>
-            <p className="fee-text">택배배송 / 무료배송</p>
+            <p className="fee-text">{`택배배송 / ${detailProduct.shipping_fee}`}</p>
             <hr />
             <Counter />
             <hr />
@@ -54,8 +78,14 @@ const DetailWrap = styled.article`
   display: flex;
   gap: 50px;
 
-  & div {
+  & div,
+  & img {
     width: 100%;
+  }
+
+  img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
   }
 
   .product-img {
@@ -76,7 +106,7 @@ const DetailTop = styled.div`
     margin: 16px 0 20px 0;
   }
 
-  p:last-child {
+  p:last-child strong {
     font-size: 36px;
     font-family: var(--font--Bold);
   }
