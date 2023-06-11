@@ -77,8 +77,21 @@ export default function Detail() {
               </div>
             </ProductPrice>
             <ButtonWrap>
-              <Button text="바로 구매"></Button>
-              <Button text="장바구니 담기" color="var(--gray900)"></Button>
+              {/* <Button
+                bgColor="var(--gray)"
+                disabled={product.stock <= 0}
+                noCursor={product.stock <= 0}
+              > */}
+              <Button
+                text="바로 구매"
+                disabled={detailProduct.stock <= 0}
+                noCursor={detailProduct.stock <= 0}
+              />
+              <Button
+                text="장바구니 담기"
+                color="var(--gray900)"
+                noCursor={detailProduct.stock <= 0}
+              />
             </ButtonWrap>
           </DetailBottom>
         </div>

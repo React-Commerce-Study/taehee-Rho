@@ -15,4 +15,16 @@ const ButtonStyled = styled.button`
   font-family: var(--font--Bold);
   font-size: 18px;
   cursor: pointer;
+
+  ${(props) =>
+    props.disabled &&
+    css`
+      background-color: var(--gray700);
+    `}
+
+  ${(props) =>
+    props.noCursor &&
+    css`
+      cursor: default;
+    `}
 `;
