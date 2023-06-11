@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import PlusIcon from "../../assets/icon-plus-line.svg";
 import MinusIcon from "../../assets/icon-minus-line.svg";
 
 export default function Counter() {
+  const [count, setCount] = useState(1);
+  console.log(`현재 카운트: ${count}`);
+
+  const productNumHandler = (type) => {
+    if (type === "add") {
+      setCount((prevCount) => prevCount + 1);
+    } else if (count > 1) {
+      setCount((prevCount) => prevCount - 1);
+    }
+  };
+
   return (
     <CounterWrap>
-      <PlusButton type="button"></PlusButton>
-      <p>1</p>
-      <MinusButton type="button"></MinusButton>
+      <PlusButton
+        type="button"
+        onClick={() => {
+          productNumHandler("add");
+        }}
+      ></PlusButton>
+      <p>{count}</p>
+      <MinusButton
+        type="button"
+        onClick={() => productNumHandler("minus")}
+      ></MinusButton>
     </CounterWrap>
   );
 }
